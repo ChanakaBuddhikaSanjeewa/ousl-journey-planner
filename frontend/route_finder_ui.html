@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OUSL Student Journey Planner</title>
+  <link rel="icon"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='100%25' height='100%25' fill='%233563e9'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial' font-size='10' fill='white'%3E%F0%9F%8E%93%3C/text%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" />
+  <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+  <link rel="stylesheet" href="route_finder_ui.css">
+</head>
+
+<body>
+  <div class="top-message" id="top-message"></div>
+  <main class="app">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#3563e9" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 10 12 5 2 10l10 5 10-5z" />
+            <path d="M6 12v5c3 2.5 9 2.5 12 0v-5" />
+          </svg>
+        </div>
+        <div>
+          <h1>OUSL Student Journey Planner</h1>
+          <p>Open University of Sri Lanka, Nawala</p>
+        </div>
+      </div>
+      <div class="live-status" id="net"><span class="dot"></span><span id="net-label">Online</span></div>
+    </header>
+
+    <section class="hero">
+      <p class="eyebrow">FROM ANYWHERE IN SRI LANKA</p>
+      <h2>Plan your trip to campus.</h2>
+      <p>Choose where you are starting from. See distance, time and cost for walking, bike, bus, highway bus, train and
+        three-wheeler, then follow the route on a rotating map.</p>
+    </section>
+
+    <section class="dashboard">
+      <form class="card" id="form" autocomplete="off">
+        <h3>Where are you starting?</h3>
+        <p class="sub">Use your current location or search any town, address or place in Sri Lanka.</p>
+        <label>Start location
+          <div class="row">
+            <input type="text" id="start-input" placeholder="e.g. Kandy, Galle, Jaffna, Kaduwela...">
+            <button type="button" class="ghost" id="use-location">Use my location</button>
+          </div>
+          <div class="suggestions">
+            <ul id="suggestions" hidden></ul>
+          </div>
+        </label>
+        <div class="dest-box">
+          <strong>Destination</strong>
+          <span id="campus-name">Open University of Sri Lanka (Nawala Campus)</span>
+        </div>
+        <button class="find" id="find" type="submit">Show my travel options</button>
+      </form>
+
+      <section class="card">
+        <h3>Message for the student</h3>
+        <p class="sub">Distance, time and estimated cost for every travel mode.</p>
+        <div class="msg-box empty" id="message">Pick a start location and press "Show my travel options".</div>
+        <div class="chips" id="chips"></div>
+      </section>
+    </section>
+
+    <section class="card">
+      <h3>Travel modes</h3>
+      <p class="sub">Each mode is calculated separately. Select one to draw it on the map.</p>
+      <div class="modes" id="modes"></div>
+      <div class="detail" id="detail" hidden></div>
+    </section>
+
+    <section class="card">
+      <h3>Route map and navigation</h3>
+      <p class="sub">Drag with right mouse button (or two fingers on a phone) to rotate. In heading-up mode the map
+        turns as you move.</p>
+      <div class="maptools">
+        <button type="button" class="ghost" id="rot-left">Rotate left</button>
+        <button type="button" class="ghost" id="rot-right">Rotate right</button>
+        <button type="button" class="ghost" id="north">North up</button>
+        <label class="toggle"><input type="checkbox" id="heading-up" checked> Heading-up while navigating</label>
+        <span class="spacer"></span>
+        <button type="button" class="ghost" id="demo" disabled>Preview drive</button>
+        <button type="button" id="nav-start" disabled>Start navigation</button>
+        <button type="button" class="danger" id="nav-stop" hidden>Stop navigation</button>
+      </div>
+      <div id="map"></div>
+      <div class="navbar" id="navbar">
+        <div class="big" id="nav-instr">Waiting for GPS...</div>
+        <div class="small" id="nav-sub"></div>
+      </div>
+    </section>
+  </main>
+
+  <script src="route_finder_ui.js"></script>
+</body>
+
+</html>
